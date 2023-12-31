@@ -1,0 +1,15 @@
+:root{
+    --primary-color: #a0d6be;
+}
+
+.formContainer{
+    align-items: center;
+    background-color: var(--primary-color);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+
+    .formWrapper{
+        
+    }
+}
