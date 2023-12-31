@@ -1,3 +1,5 @@
+// Using scss allows you to add child classes under a parent class
+
 :root{
     --primary-color: #a0d6be;
 }
@@ -10,6 +12,18 @@
     justify-content: center;
 
     .formWrapper{
-        
+        align-items: center;
+        background-color: white;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding:20px 60px;
+
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
     }
 }
