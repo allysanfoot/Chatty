@@ -1,9 +1,10 @@
 import React from 'react'
-import Register from './Register'
 
 const Home = () => {
   return (
-    <Register />
+    <div className='home'>
+      <div className="container"></div>
+    </div>
   )
 }
 
