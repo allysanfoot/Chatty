@@ -2,8 +2,8 @@ import React from 'react';
 
 const ChatPanel = () => {
     return (
-        <div>
-            {/* Your chat panel content goes here */}
+        <div className='chatPanel'>
+            ChatPanel
         </div>
     );
 };

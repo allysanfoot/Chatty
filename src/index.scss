@@ -75,3 +75,40 @@
         }
     }
 }
+
+.home{
+    align-items: center;
+    background-color: white;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+
+    .container{
+        border: 2px solid red;
+        border-radius: 10px;
+        display: flex;
+        height: 80%;
+        overflow: hidden;
+        width: 65%;
+
+        .sidebar{
+            background-color: grey;
+            border-right: 2px solid turquoise;
+            flex: 1;
+
+            .navigation{
+                align-items: center;
+                background-color: burlywood;
+                color: black;
+                display: flex;
+                height: 50px;
+                justify-content: space-between;
+                padding: 10px;
+            }
+        }
+
+        .chatPanel{
+            flex: 2;
+        }
+    }
+}

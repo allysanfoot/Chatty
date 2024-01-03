@@ -1,9 +1,10 @@
 import React from 'react';
+import Navigation from './Navigation';
 
 function Sidebar() {
     return (
-        <div>
-            {/* Your sidebar content goes here */}
+        <div className='sidebar'>
+            <Navigation />
         </div>
     );
 }
