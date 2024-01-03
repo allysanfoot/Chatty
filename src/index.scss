@@ -40,11 +40,38 @@
                 padding: 10px;
                 border: 1px solid grey;
                 border-radius: 5px;
+                width: 250px;
 
             &::placeholder{
                 color:rgb(175, 175, 175)
             }    
             }
+
+            button{
+                background-color: var(--secondary-color);
+                border: none;
+                color: white;
+                cursor: pointer;
+                font-weight: bold;
+                padding: 10px;
+            }
+
+            label{
+                align-items: center;
+                display: flex;
+                cursor: pointer;
+                justify-content: center;
+
+                .addImage{
+                    width: 32px;
+                }
+            }
+        }
+
+        p{
+            color: var(--secondary-color);
+            font-style: 12px;
+            margin-top: 10px;
         }
     }
 }
