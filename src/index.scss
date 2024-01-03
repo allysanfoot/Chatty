@@ -172,6 +172,18 @@
                     object-fit: cover;
                     width: 50px;
                 }
+
+                .userChatInfo{
+                    span{
+                        font-size: 15px;
+                        font-weight: bold;
+                    }
+
+                    p{
+                        color: white;
+                        font-size: 14px;
+                    }
+                }
             }
         }
 
