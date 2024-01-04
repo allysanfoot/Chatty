@@ -1,4 +1,6 @@
 import React from 'react';
+import ChatInput from './ChatInput';
+import {Messages} from './Messages';
 
 const ChatPanel = () => {
     return (
@@ -11,7 +13,10 @@ const ChatPanel = () => {
                     <img src='' alt=' '/>
                 </div>
             </div>
+            <Messages />
+            <ChatInput />
         </div>
     );
     };       
+
 export default ChatPanel;

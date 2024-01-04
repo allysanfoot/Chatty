@@ -2,8 +2,10 @@ import React from 'react'
 
 const ChatInput = () => {
     return (
-        <div>ChatInput</div>
+        <div className='chatInput'>
+            Chat Input
+        </div>
     )
-}
+};
 
-export default ChatInput
+export default ChatInput;
