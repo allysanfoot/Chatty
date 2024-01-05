@@ -202,7 +202,7 @@
 
             .chatInfo{
                 align-items: center;
-                background-color: #00e1ff;
+                background-color: #106570;
                 color: white;
                 display: flex;
                 height: 50px;
@@ -211,9 +211,51 @@
             }
             
             .chatInput{
-                background-color:purple;
+                align-items: center;
+                background-color:white;
+                display: flex;
                 height: 50px;
+                justify-content: space-between;
                 padding: 10px;
+
+                input{
+                    border: none;
+                    font-size: 15px;
+                    outline: none;
+                    width: 100%;
+
+                    &::placeholder{
+                        color: lightgrey;
+                    }
+                }
+
+                label{
+                    display: flex;
+                    gap: 10px;
+                }
+
+                .send{
+                    align-items: center;
+                    display: flex;
+                    gap: 10px;
+
+                    button{
+                        background-color: darkblue;
+                        border: none;
+                        color: cyan;
+                        padding: 10px 15px;
+                        transition: 0.2s ease-in-out;
+
+                        &:hover{
+                            background-color: blue;
+                        }
+                    }
+
+                    img{
+                        cursor: pointer;  
+                        height: 24px;
+                    }
+                }
             }
 
             .messages{
@@ -221,27 +263,46 @@
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
-                //height: 80%;
+                height: calc(100% - 160px);
                 padding: 10px;
                 overflow-y: scroll;
 
                 .message{
                     align-items: center;
                     display: flex;
-                    gap: 10px;
+                    gap: 20px;
+                    margin-bottom: 20px;
 
-                    .messageInfo{
-                        align-items: center;
+                    .messageContent{
                         display: flex;
                         flex-direction: column;
-                        gap: 5px;
+                        gap: 10px;
+                        max-width: 80%;
+
+                        p{
+                            background-color: white;
+                            border-radius: 0px 10px 10px 10px;
+                            padding: 10px 20px;
+                        }
+
+                        img{
+                            border-radius: 0px 10px 10px 10px;
+                            width: 50%;
+                        }
                     }
 
-                    img{
-                        border-radius: 50%;
-                        height: 50px;
-                        object-fit: cover;
-                        width: 50px;
+                    .messageInfo{
+                        display: flex;
+                        flex-direction: column;
+                        font-weight: 300;
+                        color: gray;
+
+                        img{
+                            border-radius: 50%;
+                            height: 40px;
+                            object-fit: cover;
+                            width: 40px;
+                        }
                     }
                 }
             }
