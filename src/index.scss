@@ -1,9 +1,25 @@
 // Using scss allows you to add child classes under a parent class
+@mixin mobile{
+    @media screen and (max-width: 480px){
+        @content;
+        
+    }
+}
+
+@mixin desktop{
+    @media screen and (max-width: 1200px){
+        @content;
+        
+    }
+}
 
 :root{
     --primary-color: #a0d6be;
     --secondary-color: #71b999;
 }
+
+// sass variables can be instantiated using the $ symbol
+// e.g. $primary-color: #a0d6be;
 
 .formContainer{
     align-items: center;
@@ -262,7 +278,6 @@
                 background-color: #f0f0f0;
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
                 height: calc(100% - 160px);
                 padding: 10px;
                 overflow-y: scroll;
@@ -282,11 +297,11 @@
                         p{
                             background-color: white;
                             border-radius: 0px 10px 10px 10px;
+                            max-width: max-content;
                             padding: 10px 20px;
                         }
 
                         img{
-                            border-radius: 0px 10px 10px 10px;
                             width: 50%;
                         }
                     }
@@ -294,6 +309,7 @@
                     .messageInfo{
                         display: flex;
                         flex-direction: column;
+                        font-size: 12px;
                         font-weight: 300;
                         color: gray;
 
@@ -302,6 +318,20 @@
                             height: 40px;
                             object-fit: cover;
                             width: 40px;
+                        }
+                    }
+
+                    &.owner{
+                        flex-direction: row-reverse;
+                        
+                        .messageContent{
+                            align-items: flex-end;
+
+                            p{
+                                background-color: black;
+                                color: white;
+                                border-radius: 10px 0px 10px 10px;
+                            }   
                         }
                     }
                 }

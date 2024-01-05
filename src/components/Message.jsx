@@ -3,7 +3,7 @@ import Wisp from '../img/wisp.png'
 
 const Message = () => {
   return (
-    <div className="message">
+    <div className="message owner">
       <div className="messageInfo">
         <img src={Wisp} alt='' />
         <span>just now</span>
