@@ -1,5 +1,7 @@
 import React from 'react';
 import Crescent from '../img/crescent.jpg';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 
 const Navigation = () => {
     return (
@@ -8,7 +10,7 @@ const Navigation = () => {
             <div className='user'>
                 <img src={Crescent} alt=''/>
                 <span>Username</span>
-                <button>Log out</button>
+                <button onClick={() => signOut(auth)}>Log out</button>
             </div>
         </div>
     )
