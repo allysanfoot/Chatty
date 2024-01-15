@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import AddImage from "../img/add-profile.png";
-import { auth } from "../firebase";
+import { auth, storage } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+ref,
+uploadBytesResumable,
+getDownloadURL,
+} from "firebase/storage";
 
 const Register = () => {
   const [error, setError] = useState(false);
@@ -11,7 +16,6 @@ const Register = () => {
     // Prevents the page from refreshing when the form is submitted
     e.preventDefault();
 
-
     // Get the values from the form
     const username = e.target[0].value;
     const email = e.target[1].value;
@@ -19,9 +23,31 @@ const Register = () => {
     const image = e.target[3].files[0];
 
     // Create a new user
-    try{
-      const response = await createUserWithEmailAndPassword(auth, email, password)
-      // console.log(response.user);
+    try {
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+        );
+        console.log(response.user);
+        
+
+      const storageRef = ref(storage, username + "/profile.jpg");
+
+      const uploadTask = uploadBytesResumable(storageRef, image);
+
+      uploadTask.on(
+        
+        (error) => {
+          setError(true);
+          setErrorMessage(error.message);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log("File available at", downloadURL);
+          });
+        }
+      );
     } catch (error) {
       setError(true);
       setErrorMessage(error.message);
