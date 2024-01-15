@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import AddImage from "../img/add-profile.png";
-import { auth, storage } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import {
-ref,
-uploadBytesResumable,
-getDownloadURL,
-} from "firebase/storage";
+import { auth, db, storage } from "../firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const Register = () => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (e) => {
-    // Prevents the page from refreshing when the form is submitted
+    // Prevents the page from refresponsehing when the form is submitted
     e.preventDefault();
 
     // Get the values from the form
@@ -22,32 +20,38 @@ const Register = () => {
     const password = e.target[2].value;
     const image = e.target[3].files[0];
 
-    // Create a new user
     try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-        );
-        console.log(response.user);
-        
+      // Create user
+      const response = await createUserWithEmailAndPassword(auth, email, password);
 
-      const storageRef = ref(storage, username + "/profile.jpg");
+      // Set image file name
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${username + date}`);
 
-      const uploadTask = uploadBytesResumable(storageRef, image);
+      await uploadBytesResumable(storageRef, image).then(() => {
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+          try {
+            // Update profile
+            await updateProfile(response.user, {
+              displayName: username,
+              photoURL: downloadURL,
+            });
+            // Create user on firesponsetore
+            await setDoc(doc(db, "users", response.user.uid), {
+              uid: response.user.uid,
+              username,
+              email,
+              photoURL: downloadURL,
+            });
 
-      uploadTask.on(
-        
-        (error) => {
-          setError(true);
-          setErrorMessage(error.message);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log("File available at", downloadURL);
-          });
-        }
-      );
+            console.log("User created successfully");
+            setSuccessMessage("User created successfully");
+          } catch (error) {
+            setError(true);
+            setErrorMessage(error.message);
+          }
+        });
+      });
     } catch (error) {
       setError(true);
       setErrorMessage(error.message);
@@ -70,6 +74,7 @@ const Register = () => {
           </label>
           <button>Sign up</button>
           {error && <span className="error">{errorMessage}</span>}
+          {successMessage && <span className="success">{successMessage}</span>}
         </form>
         <p>Already have an account? Log in here.</p>
       </div>

@@ -82,6 +82,20 @@
                     width: 32px;
                 }
             }
+
+            .error{
+                display: flex;
+                color: red;
+                font-weight: bold;
+                justify-content: center;
+            }
+
+            .success{
+                display: flex;
+                color: green;
+                font-weight: bold;
+                justify-content: center;
+            }
         }
 
         p{
