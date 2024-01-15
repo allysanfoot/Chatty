@@ -1,18 +1,13 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCxnyzEHqasUyGmi_SMprUClbWLb2DUsOM",
-    authDomain: "chatty-ef503.firebaseapp.com",
-    projectId: "chatty-ef503",
-    storageBucket: "chatty-ef503.appspot.com",
-    messagingSenderId: "554971132605",
-    appId: "1:554971132605:web:71f03cb844d661050dbdd4",
-    measurementId: "G-4MHE5ET16Q"
+    apiKey: "AIzaSyDsY1jQFagrLtdJDiJj3_Jua1NdDL2JBd8",
+    authDomain: "chatty-3dd13.firebaseapp.com",
+    projectId: "chatty-3dd13",
+    storageBucket: "chatty-3dd13.appspot.com",
+    messagingSenderId: "361489133189",
+    appId: "1:361489133189:web:07900adc26a8e5692dc3ec"
 };
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const auth = getAuth()
-export const storage = getStorage();
+const app = initializeApp(firebaseConfig);
