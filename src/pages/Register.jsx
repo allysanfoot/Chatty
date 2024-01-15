@@ -4,11 +4,14 @@ import { auth, db, storage } from "../firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     // Prevents the page from refresponsehing when the form is submitted
@@ -44,8 +47,10 @@ const Register = () => {
               photoURL: downloadURL,
             });
 
+            await setDoc(doc(db, 'userChats', response.user.uid), {});
             console.log("User created successfully");
             setSuccessMessage("User created successfully");
+            navigate("/");
           } catch (error) {
             setError(true);
             setErrorMessage(error.message);
