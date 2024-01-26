@@ -10,10 +10,9 @@ export const AuthenticationContextProvider = ({ children }) => {
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, (user) => {
             setUser(user);
-            console.log(user);
         });
 
-        return unsub;
+        return () => unsub();
     }, []);
 
     // Any component that is wrapped in the AuthenticationContextProvider 
