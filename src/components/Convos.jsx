@@ -14,7 +14,7 @@ const Convos = () => {
             <div className='userChat'>
                 <img src={Crescent} alt='' />
                 <div className='userChatInfo'>
-                    <span>Username</span>
+                    <span>Crescent</span>
                     <p>gimme the fuckin nip</p>
                 </div>
             </div>
