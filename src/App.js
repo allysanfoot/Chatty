@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './index.scss';
 import Register from './pages/Register';
 import Login from './pages/Login';
@@ -8,22 +7,31 @@ import { useContext } from 'react';
 import { AuthenticationContext } from './context/AuthenticationContext';
 
 function App() {
-  const {user} = useContext(AuthenticationContext);
+  const { currentUser } = useContext(AuthenticationContext);
 
-  const ProtectedRoute = ({children}) => {
-    if (user) {
-      return children;
-    } else {
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
       return <Navigate to="/login" />;
     }
-  }
+
+    return children
+  };
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/">
+          <Route
+            index
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
       </Routes>
     </Router>
   );

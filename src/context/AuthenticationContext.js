@@ -5,21 +5,22 @@ import { auth } from '../firebase';
 export const AuthenticationContext = createContext();
 
 export const AuthenticationContextProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const [currentUser, setCurrentUser] = useState({});
 
     useEffect(() => {
         const unsub = onAuthStateChanged(auth, (user) => {
-            setUser(user);
+            setCurrentUser(user);
+            console.log(user);
         });
 
-        return () => unsub();
+        return () => {
+            unsub();
+        };
     }, []);
 
-    // Any component that is wrapped in the AuthenticationContextProvider 
-    // will have access to the user object.
     return (
-        <AuthenticationContext.Provider value={{user}}>
+        <AuthenticationContext.Provider value={{ currentUser }}>
             {children}
         </AuthenticationContext.Provider>
-    )
-}
+    );
+};

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
-import Crescent from '../img/crescent.jpg'
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDoc, getDocs, setDoc, updateDoc, serverTimestamp, doc } from "firebase/firestore";
 import { db } from '../firebase'
 import { AuthenticationContext } from '../context/AuthenticationContext'
 
@@ -22,11 +21,16 @@ const Search = () => {
         } catch (err) {
             setError(true)
         }
+        // setUser(null)
+        // setUsername('')
     };
 
     const handleKey = e => {
         e.code === 'Enter' && searchUser()
     };
+
+    console.log(currentUser)
+    console.log(user)
 
     const handleSelect = async () => {
         const combinedID = 
@@ -35,13 +39,27 @@ const Search = () => {
         : user.uid + currentUser.uid
 
         try{
-            const response = await getDocs(db, "chats", combinedID);
+            const response = await getDoc(doc(db, "chats", combinedID));
 
-            if(!response.exists()){
-                await db.collection("chats").doc(combinedID).set({
-                    messages: []
-                })
-            }
+            if(!response.exists){}
+            await setDoc(doc(db, "chats", combinedID), { messages: [] });
+
+            await updateDoc(doc(db, "userChats", currentUser.uid), {
+                [combinedID + ".userInfo"]: {
+                    uid: user.uid,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL
+                },
+                [combinedID + ".date"]: serverTimestamp()
+            })
+            await updateDoc(doc(db, "userChats", user.uid), {
+                [combinedID + ".userInfo"]: {
+                    uid: currentUser.uid,
+                    displayName: currentUser.displayName,
+                    photoURL: currentUser.photoURL
+                },
+                [combinedID + ".date"]: serverTimestamp()
+            })
         } catch (err) {
             setError(true)
         }
@@ -50,7 +68,12 @@ const Search = () => {
     return (
         <div className='search'>
             <div className='searchForm'>
-                <input type='text' placeholder='Search for a user' onChange={e => setUsername(e.target.value)} onKeyDown={handleKey} />
+                <input 
+                type='text' placeholder='Search for a user' 
+                onChange={e => setUsername(e.target.value)} 
+                onKeyDown={handleKey} 
+                value={username}
+                />
             </div>
             {error && <div className='error'>User not found</div>}
             {user && <div className='userChat' onClick={handleSelect}>

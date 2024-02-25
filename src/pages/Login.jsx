@@ -1,5 +1,4 @@
 import React from 'react'
-import AddImage from '../img/add-profile.png'
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { auth } from '../firebase';
@@ -16,7 +15,7 @@ const Login = () => {
     const password = e.target[1].value;
 
     try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       navigate('/');
     } catch (error) {
       setError(true);
