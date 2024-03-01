@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
-import Crescent from '../img/crescent.jpg'
 import { onSnapshot, doc } from 'firebase/firestore'
 import { db } from '../firebase'
 import { AuthenticationContext } from '../context/AuthenticationContext'
+import { ChatContext } from '../context/ChatContext'
 
 const Convos = () => {
 
     const [chats, setChats] = useState([])
     const {currentUser} = useContext(AuthenticationContext)
-    console.log(currentUser)
+    const {dispatch} = useContext(ChatContext)
 
     useEffect(() => {
         const getChats = () => {
@@ -24,16 +24,17 @@ const Convos = () => {
             currentUser.uid && getChats()
         }, [currentUser.uid]);
 
-    console.log(chats)
-
+    const handleSelect = (user) => {
+        dispatch({type: 'CHANGE_USER', payload: user })
+    }
     return (
         <div className='convos'>
             {Object.entries(chats)?.map(chat => (
-                <div className='userChat' key={chat[0]}>
-                <img src={Crescent} alt='' />
+                <div className='userChat' key={chat[0]} onClick={() => handleSelect(chat[1].userInfo)}>
+                <img src={chat[1].userInfo.photoURL} alt='' />
                 <div className='userChatInfo'>
-                    <span>Username</span>
-                    <p>What's up cuck</p>
+                    <span>{chat[1].userInfo.displayName}</span>
+                    <p>{chat[1].userInfo.lastMessage?.text}</p>
                 </div>
             </div>
                 ))}

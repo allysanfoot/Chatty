@@ -1,7 +1,14 @@
 import React from 'react'
 import Wisp from '../img/wisp.png'
+import { useContext } from 'react'
+import { AuthenticationContext } from '../context/AuthenticationContext'
+import { ChatContext } from '../context/ChatContext'
 
-const Message = () => {
+const Message = ({message}) => {
+
+  const {currentUser} = useContext(AuthenticationContext);
+  const {data} = useContext(ChatContext);
+
   return (
     <div className="message owner">
       <div className="messageInfo">
