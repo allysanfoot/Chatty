@@ -123,8 +123,7 @@
         width: 65%;
 
         .sidebar{
-            background-color: grey;
-            border-right: 2px solid turquoise;
+            background-color: var(--primary-color);
             flex: 1;
 
             .navigation{

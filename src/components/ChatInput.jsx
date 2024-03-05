@@ -4,6 +4,10 @@ import AttachFile from '../img/attach-file.png'
 import { useState, useContext } from 'react'
 import { AuthenticationContext } from '../context/AuthenticationContext'
 import { ChatContext } from '../context/ChatContext'
+import { Timestamp, arrayUnion, doc, updateDoc } from 'firebase/firestore'
+import { v4 as uuid } from "uuid";
+import { db, storage } from '../firebase'
+import { ref, uploadBytesResumable } from 'firebase/storage'
 
 const ChatInput = () => {
     const {currentUser} = useContext(AuthenticationContext);
@@ -11,8 +15,21 @@ const ChatInput = () => {
     const [text, setText] = useState('');
     const [img, setImg] = useState(null);
 
-    const handleSend = () => {
-        
+    const handleSend = async () => {
+
+        if(img){
+            const storageRef = ref(storage, uuid)
+            const uploadTask = uploadBytesResumable(storageRef, img)
+        } else {
+            await updateDoc(doc(db, "chats", data.chatID), {
+                messages: arrayUnion({
+                    id: uuid,
+                    text,
+                    senderID: currentUser.uid,
+                    date: Timestamp.now(),
+                })
+            })
+        }
     }
 
     return (

@@ -43,7 +43,7 @@ const Search = () => {
                 await updateDoc(doc(db, "userChats", currentUser.uid), {
                     [combinedId + ".userInfo"]: {
                         uid: user.uid,
-                        displayName: user.displayName,
+                        displayName: user.username,
                         photoURL: user.photoURL,
                     },
                     [combinedId + ".date"]: serverTimestamp(),
@@ -52,13 +52,15 @@ const Search = () => {
                 await updateDoc(doc(db, "userChats", user.uid), {
                     [combinedId + ".userInfo"]: {
                         uid: currentUser.uid,
-                        displayName: currentUser.displayName,
+                        displayName: currentUser.username,
                         photoURL: currentUser.photoURL,
                     },
                     [combinedId + ".date"]: serverTimestamp(),
                 });
             }
-        } catch (err) { }
+        } catch (err) { 
+            // setError(true)
+        }
 
         setUser(null);
         setUsername("")
@@ -78,7 +80,7 @@ const Search = () => {
             {user && <div className='userChat' onClick={handleSelect}>
                 <img src={user.photoURL} alt='' />
                 <div className='userChatInfo'>
-                    <span>{user.displayName}</span>
+                    <span>{user.username}</span>
                 </div>
             </div>}
         </div>
