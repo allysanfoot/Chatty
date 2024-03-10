@@ -4,7 +4,7 @@ import AttachFile from '../img/attach-file.png'
 import { useState, useContext } from 'react'
 import { AuthenticationContext } from '../context/AuthenticationContext'
 import { ChatContext } from '../context/ChatContext'
-import { Timestamp, arrayUnion, doc, updateDoc } from 'firebase/firestore'
+import { Timestamp, arrayUnion, doc, serverTimestamp, updateDoc } from 'firebase/firestore'
 import { v4 as uuid } from "uuid";
 import { db, storage } from '../firebase'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
@@ -51,6 +51,21 @@ const ChatInput = () => {
                 })
             })
         }
+
+        // Update the last message and the last message date in the userChats collection for the current user
+        await updateDoc(doc(db, "userChats", currentUser.uid), {
+            [data.chatID + '.lastMessage']: {text},
+            [data.chatID + '.lastMessageDate']: serverTimestamp(),
+        })
+
+        await updateDoc(doc(db, "userChats", data.user.uid), {
+            [data.chatID + '.lastMessage']: {text},
+            [data.chatID + '.lastMessageDate']: serverTimestamp(),
+        })
+
+        // Clear the input
+        setImg(null);
+        setText('');
     }
 
     return (
@@ -59,6 +74,7 @@ const ChatInput = () => {
             type='text' 
             placeholder='Aa' 
             onChange={(e) => setText(e.target.value)}
+            value={text}
             />
             <div className="send">
                 <img src={AttachFile} alt='' />
