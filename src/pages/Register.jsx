@@ -10,6 +10,7 @@ const Register = () => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -36,7 +37,7 @@ const Register = () => {
           try {
             // Update profile
             await updateProfile(response.user, {
-              displayName: username,
+              username: username,
               photoURL: downloadURL,
             });
             // Create user on firesponsetore
@@ -54,12 +55,14 @@ const Register = () => {
           } catch (error) {
             setError(true);
             setErrorMessage(error.message);
+            setLoading(false);
           }
         });
       });
     } catch (error) {
       setError(true);
       setErrorMessage(error.message);
+      setLoading(false);
     }
   };
 
@@ -77,7 +80,8 @@ const Register = () => {
             <img src={AddImage} className="addImage" alt="" />
             <span>Upload a profile image</span>
           </label>
-          <button>Sign up</button>
+          <button disabled={loading}>Sign up</button>
+          {loading && "Uploading and compressing the image"}
           {error && <span className="error">{errorMessage}</span>}
           {successMessage && <span className="success">{successMessage}</span>}
         </form>

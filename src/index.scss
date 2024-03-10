@@ -14,8 +14,9 @@
 }
 
 :root{
-    --primary-color: #a0d6be;
-    --secondary-color: #71b999;
+    --primary-color: #719273;
+    --secondary-color: #a5cea8;
+    --tertiary-color: #1e4b37;
 }
 
 // sass variables can be instantiated using the $ symbol
@@ -109,13 +110,12 @@
 
 .home{
     align-items: center;
-    background-color: white;
+    background-color: rgb(184, 203, 186);
     display: flex;
     height: 100vh;
     justify-content: center;
 
     .container{
-        border: 2px solid red;
         border-radius: 10px;
         display: flex;
         height: 80%;
@@ -128,8 +128,8 @@
 
             .navigation{
                 align-items: center;
-                background-color: burlywood;
-                color: black;
+                background-color: var(--tertiary-color);
+                color: white;
                 display: flex;
                 height: 50px;
                 justify-content: space-between;
@@ -162,7 +162,7 @@
             }
 
             .search{
-                border-bottom: 2px solid plum;
+                background-color: white;
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
@@ -173,11 +173,11 @@
                     input{
                         background-color: transparent;
                         border: none;
-                        color: white;
+                        color: black;
                         outline: none;
 
                         &::placeholder{
-                            color: white;
+                            color: lightgrey;
                         }
                     }
                 }
@@ -185,7 +185,8 @@
 
             .userChat{
                 align-items: center;
-                color: white;
+                background-color: var(--primary-color);
+                color: black;
                 cursor: pointer;
                 display: flex;
                 gap: 10px;
@@ -193,7 +194,7 @@
                 transition: background-color 0.2s ease-in-out;
 
                 &:hover{
-                    background-color: deeppink;
+                    background-color: #bcdbbe;
                 }
 
                 img{
@@ -232,7 +233,7 @@
 
             .chatInfo{
                 align-items: center;
-                background-color: #106570;
+                background-color: var(--tertiary-color);
                 color: white;
                 display: flex;
                 height: 50px;
@@ -270,14 +271,16 @@
                     gap: 10px;
 
                     button{
-                        background-color: darkblue;
+                        background-color: var(--tertiary-color);
                         border: none;
-                        color: cyan;
+                        border-radius: 10px;
+                        color: var(--secondary-color);
                         padding: 10px 15px;
                         transition: 0.2s ease-in-out;
 
                         &:hover{
-                            background-color: blue;
+                            background-color: var(--secondary-color);
+                            color: white;
                         }
                     }
 
@@ -289,7 +292,7 @@
             }
 
             .messages{
-                background-color: #f0f0f0;
+                background-color: #dee7dd;
                 display: flex;
                 flex-direction: column;
                 height: calc(100% - 160px);

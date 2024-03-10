@@ -36,7 +36,7 @@ const ChatInput = () => {
         <div className='chatInput'>
             <input 
             type='text' 
-            placeholder='Type something...' 
+            placeholder='Aa' 
             onChange={(e) => setText(e.target.value)}
             />
             <div className="send">

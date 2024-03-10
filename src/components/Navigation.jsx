@@ -11,7 +11,7 @@ const Navigation = () => {
             <span className='logo'>Chatty</span>
             <div className='user'>
                 <img src={currentUser.photoURL} alt=''/>
-                <span>{currentUser.displayName}</span>
+                <span>{currentUser.username}</span>
                 <button onClick={() => signOut(auth)}>Log out</button>
             </div>
         </div>
