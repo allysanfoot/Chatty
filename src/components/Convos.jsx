@@ -30,7 +30,7 @@ const Convos = () => {
     
     return (
         <div className='convos'>
-            {Object.entries(chats)?.sort((a, b) => b[1].date - a[1].date).map(chat => (
+            {Object.entries(chats)?.sort((a, b) => b[1].lastMessageDate - a[1].lastMessageDate).map(chat => (
                 <div 
                 className='userChat' 
                 key={chat[0]} 
