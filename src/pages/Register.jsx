@@ -19,7 +19,7 @@ const Register = () => {
     e.preventDefault();
 
     // Get the values from the form
-    const username = e.target[0].value;
+    const displayName = e.target[0].value;
     const email = e.target[1].value;
     const password = e.target[2].value;
     const image = e.target[3].files[0];
@@ -30,20 +30,20 @@ const Register = () => {
 
       // Set image file name
       const date = new Date().getTime();
-      const storageRef = ref(storage, `${username + date}`);
+      const storageRef = ref(storage, `${displayName + date}`);
 
       await uploadBytesResumable(storageRef, image).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
             // Update profile
             await updateProfile(response.user, {
-              username: username,
+              displayName,
               photoURL: downloadURL,
             });
             // Create user on firesponsetore
             await setDoc(doc(db, "users", response.user.uid), {
               uid: response.user.uid,
-              username,
+              displayName,
               email,
               photoURL: downloadURL,
             });

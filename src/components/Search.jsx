@@ -11,7 +11,7 @@ const Search = () => {
     const { currentUser } = useContext(AuthenticationContext)
 
     const searchUser = async () => {
-        const q = query(collection(db, "users"), where("username", "==", username));
+        const q = query(collection(db, "users"), where("displayName", "==", username));
 
         try {
             const querySnapshot = await getDocs(q);
@@ -23,7 +23,7 @@ const Search = () => {
         }
     };
 
-    const handleKey = e => {
+    const handleKey = (e) => {
         e.code === 'Enter' && searchUser()
     };
 
@@ -32,6 +32,7 @@ const Search = () => {
             currentUser.uid > user.uid
                 ? currentUser.uid + user.uid
                 : user.uid + currentUser.uid;
+
         try {
             const res = await getDoc(doc(db, "chats", combinedId));
 
@@ -43,7 +44,7 @@ const Search = () => {
                 await updateDoc(doc(db, "userChats", currentUser.uid), {
                     [combinedId + ".userInfo"]: {
                         uid: user.uid,
-                        displayName: user.username,
+                        displayName: user.displayName,
                         photoURL: user.photoURL,
                     },
                     [combinedId + ".date"]: serverTimestamp(),
@@ -52,11 +53,12 @@ const Search = () => {
                 await updateDoc(doc(db, "userChats", user.uid), {
                     [combinedId + ".userInfo"]: {
                         uid: currentUser.uid,
-                        displayName: currentUser.username,
+                        displayName: currentUser.displayName,
                         photoURL: currentUser.photoURL,
                     },
                     [combinedId + ".date"]: serverTimestamp(),
                 });
+
             }
         } catch (err) { 
             // setError(true)
@@ -65,6 +67,7 @@ const Search = () => {
         setUser(null);
         setUsername("")
     };
+
 
     return (
         <div className='search'>
@@ -80,7 +83,7 @@ const Search = () => {
             {user && <div className='userChat' onClick={handleSelect}>
                 <img src={user.photoURL} alt='' />
                 <div className='userChatInfo'>
-                    <span>{user.username}</span>
+                    <span>{user.displayName}</span>
                 </div>
             </div>}
         </div>
