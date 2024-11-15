@@ -1,70 +1,114 @@
-# Getting Started with Create React App
+# Chatty
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Chatty is a modern web-based real-time chat application built with React, Firebase, and a clean, responsive user interface. It allows users to register, log in, and engage in seamless conversations with others.
 
-## Available Scripts
+## Table of Contents
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [License](#license)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Features
+- **User Authentication**: Secure login and registration using Firebase Authentication.
+- **Real-Time Messaging**: Instant message delivery and receipt via Firebase Firestore.
+- **Search Functionality**: Quickly find users to chat with.
+- **Profile Management**: Add a profile picture for personalization.
+- **Attachments**: Send images and files during chats.
+- **Responsive Design**: Optimized for both desktop and mobile devices.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
+- **Frontend**: React, SCSS
+- **Backend**: Firebase (Authentication, Firestore)
+- **State Management**: React Context API
+- **Testing**: Jest
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+### Prerequisites
+- Node.js and npm installed on your machine.
+- A Firebase project set up with Firestore and Authentication enabled.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/Chatty.git
+   cd Chatty
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install dependencies:
+   ```bash
+   npm install 
+3. Set up Firebase
+- Replace the contents of ```src/firebase.js``` with your Firebase configuration details.
+4. Start the development server:
+  ```bash
+  npm start
+5. Open your browser and navigate to:
+  ```
+  http://localhost:3000
 
-### `npm run eject`
+### Usage
+1. Register a new user or log in with an existing account
+2. Start or join a conversation using the search bar
+3. Send messages, images, or files
+4. Personalize your profile with an avatar
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Project Structure
+```
+Chatty/
+├── public/                 # Static files
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── src/
+│   ├── components/         # Reusable components
+│   │   ├── ChatInput.jsx
+│   │   ├── ChatPanel.jsx
+│   │   ├── Convos.jsx
+│   │   ├── Message.jsx
+│   │   ├── Messages.jsx
+│   │   ├── Navigation.jsx
+│   │   ├── Search.jsx
+│   │   └── Sidebar.jsx
+│   ├── context/            # React Context for state management
+│   │   ├── AuthenticationContext.js
+│   │   └── ChatContext.js
+│   ├── img/                # Image assets
+│   │   ├── add-image.png
+│   │   ├── add-profile.png
+│   │   ├── add-user.png
+│   │   ├── attach-file.png
+│   │   ├── crescent.jpg
+│   │   ├── settings.png
+│   │   ├── video-call.png
+│   │   └── wisp.png
+│   ├── pages/              # Page components
+│   │   ├── Home.jsx
+│   │   ├── Login.jsx
+│   │   └── Register.jsx
+│   ├── App.js              # Main application component
+│   ├── index.js            # Entry point
+│   ├── firebase.js         # Firebase configuration
+│   ├── App.css             # Global styles
+│   ├── index.scss          # SCSS styles
+│   ├── reportWebVitals.js  # Performance monitoring
+│   └── setupTests.js       # Jest setup file
+├── .gitignore              # Git ignore file
+├── package.json            # Project dependencies and scripts
+├── package-lock.json       # Lock file for npm dependencies
+└── README.md               # Project documentation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+   
