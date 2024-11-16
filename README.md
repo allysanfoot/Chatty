@@ -110,5 +110,18 @@ Chatty/
 ├── package.json            # Project dependencies and scripts
 ├── package-lock.json       # Lock file for npm dependencies
 └── README.md               # Project documentation
+```
+### Screenshots
+- [Login Page Screnshot](https://imgur.com/naZbcNR)
+- [Registration Page Screenshot](https://imgur.com/T4IUNc3)
+- [Chat Window Screenshot](https://imgur.com/JzGySkG)
 
+### Contributing
+Contributions are welcome! If you'd like to contribute:
+1. Fork the repository.
+2. Create a new branch for your feature or fix.
+3. Commit your changes and push them.
+4. Submit a pull request.
    
+### License
+This project is licensed under the MIT License. See the LICENSE file for details.
