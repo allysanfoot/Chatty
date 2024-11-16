@@ -22,7 +22,6 @@ Chatty is a modern web-based real-time chat application built with React, Fireba
 - **Search Functionality**: Quickly find users to chat with.
 - **Profile Management**: Add a profile picture for personalization.
 - **Attachments**: Send images and files during chats.
-- **Responsive Design**: Optimized for both desktop and mobile devices.
 
 ---
 
